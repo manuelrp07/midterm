@@ -83,6 +83,9 @@
                 .attr("class",function(){
                   return l;
                 })
+                .attr("id",function(d,i){
+                  return dataLables[i]+","+data[l].Year;
+                })
                 .attr("x", function(d,i){
                   return p+xScale(dataLables[i]);
                 })
@@ -172,18 +175,16 @@
             d3.selectAll("rect")
               .on("click", function(){
                 var currentYear= d3.select(this).attr("class");
-                var currentY=d3.select(this).attr("y");
                  //Edit array for number of students for the selected year
                 for (i=0; i<dataLables.length;i++){
                   dataValues[i]=data[currentYear][dataLables[i]]
                 };
                 svg.selectAll("rect")
                   .data(d3.range(dataLables.length*data.length))
-                  .transition()
-                  .duration(1000)
                   .attr("y", function(){
                     //Identify university
                     var currentU=(d3.select(this).attr("x")-p)*dataLables.length/w;
+                    var currentY=d3.select("#"+parseInt(currentU)+','+parseInt(currentYear)+")").attr("y");
                     //return new position
                     return +d3.select(this).attr("y")+(p+h-currentY-dataValues[currentU]);
                   })
