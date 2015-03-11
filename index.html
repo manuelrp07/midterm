@@ -20,14 +20,40 @@
     <!--IndexLeft-->
     <div id="myIndex">
       <h1>Index</h1>
-      <h3>Explanation here</h3>
+      <h3>3.1. Bar Chart</h3>
+      <h3>3.2. Stacked Bar Chart</h3>
+      <h3>3.3. Interactive Stacked Bar Chart</h3>
     </div>
     <!--Body-->
     <div id="myBody">
       <!--Participants Header-->
       <div id="mainDiv">
-        <h2><a name="Main div"> Data Visualization</a></h2>
-          <p>Content goes here</p>
+        <!--3.1. Bar Chart-->
+        <h2><a name="3.1."> 3.1. Bar Chart</a></h2>
+        <p>Content goes here</p>
+        <script type="text/javascript">
+          d3.json("http://hivelab.org/static/exam1.json",function(data){
+            d3.select("#3.1.").selectAll(div)
+              .data(data)
+              .enter()
+              .append("div")
+              .attr("Class", "bar")
+              .style("height", function(d){
+                var barHeight=d*5;
+                return barheight;
+              })
+          })
+        </script>
+
+        <!--3.2. Stacked Bar Chart-->
+        <h2><a name="3.2"> 3.2. Stacked Bar Chart</a></h2>
+        <p>Content goes here</p>
+
+
+        <!--3.3. Interactive Stacked Bar Chart-->
+        <h2><a name="3.3"> 3.3. Interactive Stacked Bar Chart</a></h2>
+        <p>Content goes here</p>
+
       </div>
     </div>  
   </body>
