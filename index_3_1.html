@@ -40,6 +40,7 @@
             for (i=0; i<dataLables.length;i++){
               dataValues.push(data[3][dataLables[i]])
             };
+            console.log(dataValues)
             //Create SVG
             var w=400;
             var h=400;
@@ -74,7 +75,11 @@
               .attr("height",function(d,i){
                 return h-yScale(dataValues[i])
               })
-              .attr("fill", "blue");
+              .attr("fill", "blue")
+              .append("title")
+               .text(function(d,i){
+                 return "Students: "+data[3][dataLables[i]];
+                });
             //Y axis
             svg.append("g")
                 .attr("class","axis")
@@ -94,7 +99,7 @@
             //Add axes titles
             svg.append("text")
                 .attr("x",w/2+p-50)
-                .attr("y",h+2*p-5)
+                .attr("y",h+2*p-15)
                 .attr("fill", "black")
                 .attr("style","font-size:20px")
                 .text(function(){return "Universities";});
