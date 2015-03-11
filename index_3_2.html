@@ -14,7 +14,7 @@
     <div id="myheader">
       <h1>Data Visualization Midterm</h1>
       <h2>Manuel Ramirez</h2>
-      <h3>IE 590</h3>  
+      <h3>IE 590</h3>
     </div>   
     <!--IndexLeft-->
     <div id="myIndex">
@@ -105,7 +105,7 @@
                 .data(data)
                 .enter()
                 .append("circle")
-                .attr("cx", h-16)
+                .attr("cx", w+p+20)
                 .attr("cy", function(d,i){return 2*p+i*40})
                 .attr("r", 15)
                 .attr("fill", function(d,i){
@@ -116,7 +116,7 @@
                 .data(data)
                 .enter()
                 .append("text")
-                .attr("x",h)
+                .attr("x",w+p+40)
                 .attr("y",function(d,i){return 3+2*p+i*40})
                 .attr("fill", "black")
                 .attr("style","font-size:15px")
@@ -154,10 +154,17 @@
             //Add title to graph
             svg.append("text")
                 .attr("x",p+w/2-120)
-                .attr("y",30)
+                .attr("y",20)
                 .attr("fill", "black")
                 .attr("style","font-size:21px")
                 .text(function(){return "Number of students per year";});
+            //Add title note to graph
+            svg.append("text")
+                .attr("x",p+w/2-100)
+                .attr("y",40)
+                .attr("fill", "black")
+                .attr("style","font-size:15px")
+                .text(function(){return "(Hover over bars to display value)";});
           })
         </script>
       </div>

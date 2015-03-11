@@ -113,10 +113,17 @@
             //Add title to graph
             svg.append("text")
                 .attr("x",p+w/2-80)
-                .attr("y",30)
+                .attr("y",20)
                 .attr("fill", "black")
                 .attr("style","font-size:21px")
                 .text(function(){return "Number of seniors";});
+            //Add title note to graph
+            svg.append("text")
+                .attr("x",p+w/2-100)
+                .attr("y",40)
+                .attr("fill", "black")
+                .attr("style","font-size:15px")
+                .text(function(){return "(Hover over bars to display value)";});
           })
         </script>
       </div>
