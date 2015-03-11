@@ -34,9 +34,10 @@
           d3.json("https://hivelab.org/static/exam1.json",function(data){
             //Create array for number of seniors for each university
             var dataLables=Object.keys(data[0]);
+            dataLables.splice(0,1);
             //Create array with names of universities
             var dataValues=[]
-            for (i=1; i<dataLables.length;i++){
+            for (i=0; i<dataLables.length;i++){
               dataValues.push(data[3][dataLables[i]])
             };
             //Create SVG
@@ -53,9 +54,11 @@
                                 .domain([0,Math.max.apply(null, dataValues)])
                                 .range([h,0]);
             //Create scale for X axis
-            var xScale= d3.scale.quantile()
-                                .domain([0,Math.max.apply(null, dataValues)])
-                                .range([0,w]);
+            var xScale= d3.scale.ordinal()
+                                .domain(dataLables)
+                                .rangeRoundBands([0,w],0);
+            console.log(dataLables)
+            console.log(xScale("Senior"))
             //Create bars
             svg.selectAll("rect")
               .data(dataValues)
