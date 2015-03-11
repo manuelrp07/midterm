@@ -32,33 +32,83 @@
         <script type="text/javascript">
           //Read datafile
           d3.json("https://hivelab.org/static/exam1.json",function(data){
-            //Create array for seniors
-            var universities=[];
-            universities=data[3];
-            console.log(universities);
-            var w=400;
-            var h=300;
-            var p=50;
+            //Create array for number of seniors for each university
+            var dataLables=Object.keys(data[0]);
+            //Create array with names of universities
+            var dataValues=[]
+            for (i=1; i<dataLables.length;i++){
+              dataValues.push(data[3][dataLables[i]])
+            };
             //Create SVG
+            var w=400;
+            var h=400;
+            var p=60;
             var svg=d3.select("#mainDiv")
                     .append("svg")
                     .attr("width", w+2*p)
                     .attr("height", h+2*p)
                     .style("background","lightcyan");
+            //Create scale for Y axis
+            var yScale= d3.scale.linear()
+                                .domain([0,Math.max.apply(null, dataValues)])
+                                .range([h,0]);
+            //Create scale for X axis
+            var xScale= d3.scale.quantile()
+                                .domain([0,Math.max.apply(null, dataValues)])
+                                .range([0,w]);
             //Create bars
             svg.selectAll("rect")
-              .data(data)
+              .data(dataValues)
               .enter()
               .append("rect")
               .attr("x", function(d,i){
-                return p+i*(w/data.length);
+                return p+i*(w/dataValues.length);
               })
-              .attr("y",h+p-100)
-              .attr("width",function(d,i){
-                return (w/data.length)-2;
+              .attr("y", function(d,i){
+                return p+yScale(dataValues[i])
               })
-              .attr("height",100)
+              .attr("width",(w/dataValues.length)-5)
+              .attr("height",function(d,i){
+                return h-yScale(dataValues[i])
+              })
               .attr("fill", "blue");
+            //Y axis
+            svg.append("g")
+                .attr("class","axis")
+                .attr("transform","translate("+(p-5)+","+p+")")
+                .call(d3.svg.axis()
+                  .scale(yScale)
+                  .orient("left")
+                  .ticks(5));
+            //X axis
+            svg.append("g")
+                .attr("class","axis")
+                .attr("transform","translate("+(p-5)+","+(p+h)+")")
+                .call(d3.svg.axis()
+                  .scale(xScale)
+                  .orient("bottom")
+                  .ticks(0));
+            //Add axes titles
+            svg.append("text")
+                .attr("x",w/2+p-50)
+                .attr("y",h+2*p-5)
+                .attr("fill", "black")
+                .attr("style","font-size:20px")
+                .text(function(){return "Universities";});
+            svg.append("text")
+                .attr("x",-40)
+                .attr("y",h/2+p)
+                .attr("fill", "black")
+                .attr("transform","rotate(-90,10,"+(h/2+45)+")")
+                .attr("style","font-size:20px")
+                .text(function(){return "Seniors";});
+            //Add title to graph
+            svg.append("text")
+                .attr("x",p+w/2-80)
+                .attr("y",30)
+                .attr("fill", "black")
+                .attr("style","font-size:21px")
+                .text(function(){return "Number of seniors";});
           })
         </script>
       </div>
