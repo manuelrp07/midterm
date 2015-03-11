@@ -19,49 +19,17 @@
     <!--IndexLeft-->
     <div id="myIndex">
       <h1>Index</h1>
-      <h3>3.1. Bar Chart</h3>
+      <h3><a href="index_3_1.html">3.1. Bar Chart</a></h3>
       <h3><a href="index_3_2.html">3.2. Stacked Bar Chart</a></h3>
-      <h3>3.3. Interactive Stacked Bar Chart</h3>
+      <h3><a href="index_3_3.html">3.3. Interactive Stacked Bar Chart</a></h3>
     </div>
     <!--Body-->
     <div id="myBody">
       <!--Participants Header-->
       <div id="mainDiv">
         <!--3.1. Bar Chart-->
-        <h2>3.1. Bar Chart</h2>
-        <p>SGV Next</p>
-        <script type="text/javascript">
-          //Read datafile
-          d3.json("https://hivelab.org/static/exam1.json",function(data){
-            //Create array for seniors
-            var universities=[];
-            universities=data[3];
-            console.log(universities);
-            var w=400;
-            var h=300;
-            var p=50;
-            //Create SVG
-            var svg=d3.select("#mainDiv")
-                    .append("svg")
-                    .attr("width", w+2*p)
-                    .attr("height", h+2*p)
-                    .style("background","lightcyan");
-            //Create bars
-            svg.selectAll("rect")
-              .data(data)
-              .enter()
-              .append("rect")
-              .attr("x", function(d,i){
-                return p+i*(w/data.length);
-              })
-              .attr("y",h+p-100)
-              .attr("width",function(d,i){
-                return (w/data.length)-2;
-              })
-              .attr("height",100)
-              .attr("fill", "blue");
-          })
-        </script>
+        <h2>Midterm for Data Visualization</h2>
+        <p>Please navigate through the webpage using the index on the left hand side of the screen.</p>
       </div>
     </div>  
   </body>
