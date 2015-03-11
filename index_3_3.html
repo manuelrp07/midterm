@@ -185,7 +185,7 @@
                     //Identify university
                     var currentU=(d3.select(this).attr("x")-p)*dataLables.length/w;
                     //return new position
-                    return +d3.select(this).attr("y")+(p+h-currentY-dataValues[currentU]);
+                    return +d3.select(this).attr("y")+(p-currentY+yScale(dataValues[currentU]));
                   })
               })
           })
