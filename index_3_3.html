@@ -83,6 +83,10 @@
                 .attr("class",function(){
                   return l;
                 })
+                .attr("id",function(d,i){
+                  console.log(l*dataLables.length+i)
+                  return "rect"+parseInt(l*dataLables.length+i);
+                })
                 .attr("x", function(d,i){
                   return p+xScale(dataLables[i]);
                 })
@@ -181,9 +185,11 @@
                   .data(d3.range(dataLables.length*data.length))
                   .transition()
                   .duration(1000)
-                  .attr("y", function(){
+                  .attr("y", function(d,i){
                     //Identify university
                     var currentU=(d3.select(this).attr("x")-p)*dataLables.length/w;
+                    console.log(i);
+                    var currentY=d3.select("#rect"+parseInt(currentYear*dataLables.length+currentU)).attr("y");
                     //return new position
                     return +d3.select(this).attr("y")+(p-currentY+yScale(dataValues[currentU]));
                   })
